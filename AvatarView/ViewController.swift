@@ -36,14 +36,14 @@ class ViewController: UIViewController {
         ])
         
         DispatchQueue.main.async {
-            self.replaceWithRandomAvatar()
+            self.replaceWithNextAvatar(with: 0)
         }
     }
 
-    private func replaceWithRandomAvatar() {
-        self.avatarView.configuration.avatar = self.avatarArray.randomElement()!
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.replaceWithRandomAvatar()
+    private func replaceWithNextAvatar(with count: Int) {
+        self.avatarView.configuration.avatar = self.avatarArray[count]
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.replaceWithNextAvatar(with: (count + 1) % self.avatarArray.count)
         }
     }
 }
